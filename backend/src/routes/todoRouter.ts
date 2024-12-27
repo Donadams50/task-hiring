@@ -11,11 +11,8 @@ todoRouter.post("/", TodoValidator.createTodoValidator(), checkAuth, TodoControl
 // Route to get all todo items for the current user
 todoRouter.get("/", checkAuth,  TodoController.getTodosController);
 
-// // Route to get a specific todo item by ID
-// todoRouter.get("/todos/:id", TodoValidator.getTodoByIdValidator(), TodoController.getTodoByIdController);
+// Route to update a specific todo item
+todoRouter.put("/:id", TodoValidator.updateTodoValidator(), checkAuth, TodoController.updateTodoController);
 
-// // Route to update a specific todo item
-// todoRouter.put("/todos/:id", TodoValidator.updateTodoValidator(), TodoController.updateTodoController);
-
-// // Route to delete a specific todo item
-// todoRouter.delete("/todos/:id", TodoValidator.deleteTodoValidator(), TodoController.deleteTodoController);
+// Route to delete a specific todo item
+todoRouter.delete("/:id",  checkAuth, TodoController.deleteTodoController);

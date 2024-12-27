@@ -13,7 +13,6 @@ const createTodoHandler = async (req: CustomRequest, res: Response) => {
   const { title, description, dueDate } = req.body;
   // Get the user object from the request (attached by the checkAuth middleware)
   const user = req.user; 
-  console.log("req.use",req.user)
 
   if (!user) { 
     // Handle the case where user is not found (potentially due to authentication issues)

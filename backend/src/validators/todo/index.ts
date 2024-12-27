@@ -1,1 +1,1 @@
-export * from "./createTodo.validator";
+export * from "./todo.validator";

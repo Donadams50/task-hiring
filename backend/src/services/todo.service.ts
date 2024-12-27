@@ -37,3 +37,59 @@ export const getTodos = async (user: UserEntity) => {
     throw new Error("Failed to fetch todos.");
   }
 };
+
+export const getOneTodo = async (data) => {
+  console.log(data)
+  const todoRepository = AppDataSouce.getRepository(TodoEntity);
+  const findTodo = await todoRepository.findOne({ where: { ...data },relations: ['user'],select: { 
+    user: { 
+      uuid: true, 
+      username: true, 
+      email: true 
+    } 
+  }  });
+  console.log("wetttu", findTodo)
+  if (!findTodo) return null;
+  return findTodo;
+};
+
+
+export const updateTodo = async ( data: { title?: string; description?: string; dueDate?: Date; isCompleted?: boolean; user: UserEntity, getTodo: TodoEntity }) => {
+  try {
+    const todoRepository = AppDataSouce.getRepository(TodoEntity);
+    const todo = data.getTodo
+
+    // Update only the provided fields
+    if (data.title) {
+      todo.title = data.title;
+    }
+    if (data.description) {
+      todo.description = data.description;
+    }
+    if (data.dueDate) {
+      todo.dueDate = data.dueDate;
+    }
+    if (data.isCompleted !== undefined) { 
+      todo.isCompleted = data.isCompleted; 
+    }
+
+    await todoRepository.save(todo);
+
+    return todo;
+  } catch (error) {
+    throw error; 
+  }
+};
+
+
+export const deleteTodo = async ( todo: TodoEntity) => {
+  try {
+    const todoRepository = AppDataSouce.getRepository(TodoEntity);
+
+    await todoRepository.remove(todo); 
+
+    return { message: 'Todo deleted successfully.' }; 
+  } catch (error) {
+    throw error; 
+  }
+};

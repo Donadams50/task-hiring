@@ -19,23 +19,10 @@ export const createTodoValidator = () => {
   ];
 };
 
-export const getTodoByIdValidator = () => {
-  return [
-    body("id")
-      .exists()
-      .withMessage("Todo ID is required.")
-      .isString()
-      .withMessage("Todo ID must be a string."),
-  ];
-};
+
 
 export const updateTodoValidator = () => {
   return [
-    body("id")
-      .exists()
-      .withMessage("Todo ID is required.")
-      .isString()
-      .withMessage("Todo ID must be a string."),
     body("title")
       .optional()
       .isString()
@@ -52,15 +39,5 @@ export const updateTodoValidator = () => {
       .optional()
       .isDate()
       .withMessage("Due date must be a valid date."),
-  ];
-};
-
-export const deleteTodoValidator = () => {
-  return [
-    body("id")
-      .exists()
-      .withMessage("Todo ID is required.")
-      .isString()
-      .withMessage("Todo ID must be a string."),
   ];
 };

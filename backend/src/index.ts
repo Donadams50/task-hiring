@@ -15,7 +15,7 @@ const setupServer = async () => {
 
   app.use(cors());
   app.use(express.json());
-  app.use(clientUse());
+  //app.use(clientUse());
   app.use(routeMiddleware);
   app.use("/health", (_req, res) => {
     res.json({ msg: "Hello Get Zell" });
